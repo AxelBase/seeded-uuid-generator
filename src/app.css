@@ -1,0 +1,275 @@
+/* app.css */
+
+/* --- Variables --- */
+:root {
+  --brand-primary: #1F3A3D;
+  --brand-light: #2c5256;
+  --brand-accent: #3A6B70;
+  --text-white: #ffffff;
+  --bg-color: #f4f7f7;
+  --shadow-soft: 0 10px 25px rgba(31, 58, 61, 0.15);
+  --radius-bubbly: 50px; /* The bubbly effect */
+  --radius-card: 20px;
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: #333;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  /* Ensure footer sticks to bottom via flex layout in +layout */
+}
+
+/* --- Typography & Smoothness --- */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--brand-primary);
+  font-weight: 700;
+}
+
+/* --- Layout Utilities --- */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  padding-top: 100px; /* Offset for fixed navbar */
+  padding-bottom: 80px; /* Offset for footer spacing */
+}
+
+/* --- Custom Navbar --- */
+.navbar-custom {
+  background-color: var(--brand-primary);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-brand-logo {
+  height: 40px;
+  width: auto;
+  transition: var(--transition-smooth);
+}
+
+.navbar-brand-logo:hover {
+  transform: rotate(-10deg) scale(1.1);
+}
+
+.navbar-brand-text {
+  color: var(--text-white);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link-custom {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.nav-link-custom:hover {
+  color: var(--text-white);
+}
+
+/* Underline animation for links */
+.nav-link-custom::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: white;
+  transition: var(--transition-smooth);
+  border-radius: 2px;
+}
+
+.nav-link-custom:hover::after {
+  width: 100%;
+}
+
+/* --- Buy Me A Coffee Button --- */
+.bmac-wrapper {
+  position: relative;
+}
+
+.bmac-button {
+  background: linear-gradient(135deg, #FFDD00 0%, #FBB03B 100%);
+  border: none;
+  border-radius: var(--radius-bubbly);
+  padding: 0.5rem 1.2rem;
+  font-weight: 700;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(251, 176, 59, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.bmac-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.bmac-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(251, 176, 59, 0.6);
+}
+
+.bmac-dropdown {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+  z-index: 1001;
+  overflow: hidden;
+}
+
+.bmac-dropdown a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--brand-primary);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: var(--transition-smooth);
+  text-align: center;
+}
+
+.bmac-dropdown a:hover {
+  background-color: #f0f0f0;
+  color: #000;
+  transform: scale(1.05);
+}
+
+/* --- Form & Cards --- */
+.card-bubbly {
+  background: white;
+  border-radius: var(--radius-card);
+  border: none;
+  box-shadow: var(--shadow-soft);
+  padding: 2rem;
+  transition: var(--transition-smooth);
+}
+
+.card-bubbly:hover {
+  transform: translateY(-5px);
+}
+
+.form-control {
+  border-radius: var(--radius-bubbly);
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e0e0e0;
+  transition: var(--transition-smooth);
+}
+
+.form-control:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 4px rgba(31, 58, 61, 0.1);
+}
+
+.btn {
+  border-radius: var(--radius-bubbly);
+  padding: 0.6rem 2rem;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--brand-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--brand-light);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(31, 58, 61, 0.3);
+}
+
+.btn-success {
+  background-color: #28a745;
+}
+
+.btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* --- Section Placeholders --- */
+section {
+  padding: 4rem 0;
+  border-bottom: 1px dashed #e0e0e0;
+}
+section:last-child {
+  border-bottom: none;
+}
+
+/* --- Footer --- */
+.footer-custom {
+  background-color: var(--brand-primary);
+  color: rgba(255,255,255,0.7);
+  padding: 1.5rem 0;
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  /* Fixed at bottom visual, but using flexbox layout logic */
+  margin-top: auto; 
+}
+
+.footer-links a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+  opacity: 1;
+}

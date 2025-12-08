@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>AxelBase – Seeded/Deterministic UUID Generator</title>
+        <link rel="icon" href="../../AxelLab-Logo.ico" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        />
+
+        
+		<link href="../../_app/immutable/assets/0.CCM5rTYY.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/8.MXSlCsoe.css" rel="stylesheet">
+		<link rel="modulepreload" href="../../_app/immutable/entry/start.BDkvFZON.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Bsshli1w.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CiJE2CXu.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CwymP3Wc.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/-33sGUsW.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Bu8gRI37.js">
+		<link rel="modulepreload" href="../../_app/immutable/entry/app.7Y8erq9-.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/C5yWLS92.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DvoYs7jT.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CLlG5vDu.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/0.CGUPJoaV.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DjWqG_qe.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/D3IJptOo.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/C-Oju6rN.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CechfJk0.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/8.gtDdWeEo.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CGNS_j13.js"><!--led0iy--><meta name="description" content="Learn how to create database fixtures with deterministic UUIDs so primary keys and foreign keys stay identical across development, CI, and staging."/> <meta property="og:title" content="Generating Stable Primary Keys for Database Fixtures"/> <meta property="og:description" content="Learn how to create database fixtures with deterministic UUIDs so primary keys and foreign keys stay identical across development, CI, and staging."/> <meta property="og:url" content="../../blog/posts/post4"/> <meta property="og:type" content="article"/> <meta name="twitter:card" content="summary_large_image"/><!----><title>Generating Stable Primary Keys for Database Fixtures | Blog</title>
+    </head>
+    <body data-sveltekit-preload-data="hover">
+        <div style="display: contents"><!--[--><!--[--><!----><div class="page-wrapper"><header class="navbar-custom"><nav class="nav-container"><div class="brand-section"><a href="../../" aria-label="Home"><img src="../../AxelLab-Logo.ico" alt="AxelLab Logo" class="navbar-brand-logo"/></a> <a class="navbar-brand-text" href="../../">AxelBase</a> <div class="bmac-wrapper"><button class="bmac-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.35,22.2L12,22A10,10,0,0,1,2,12V10A2,2,0,0,1,4,8H7.2A5.13,5.13,0,0,1,12,3A5.13,5.13,0,0,1,16.8,8H20A2,2,0,0,1,22,10V12A10,10,0,0,1,12.35,22.2M4,10V12A8,8,0,0,0,12,20A8,8,0,0,0,20,12V10H16.8A5.11,5.11,0,0,1,12.5,5.12A5.15,5.15,0,0,1,7.2,10H4Z"></path></svg> <span class="d-none d-md-inline">Coffee</span></button> <!--[!--><!--]--></div></div> <ul class="nav-links d-none d-md-flex"><li><a class="nav-link-custom" href="../../">Home</a></li> <li><a class="nav-link-custom" href="../../#about">About</a></li> <li><a class="nav-link-custom" href="../../#howto">How to use</a></li> <li><a class="nav-link-custom" href="../../#faq">FAQ</a></li> <li><a class="nav-link-custom" href="../../blog">Blog</a></li></ul> <div class="d-md-none"></div></nav></header> <main><!--[--><!----><div class="container fade-in post-layout svelte-led0iy"><div class="breadcrumbs svelte-led0iy"><a href="../../blog" class="svelte-led0iy">Blog</a> <span>/</span> <p>Generating Stable Primary Keys for Database Fixtures</p></div> <article class="prose svelte-led0iy"><h1 class="svelte-led0iy">Generating Stable Primary Keys for Database Fixtures</h1> <p class="post-meta svelte-led0iy">Published: December 8, 2025</p> <p class="svelte-led0iy">Database fixtures are the foundation of reliable integration tests. Whether you use Prisma, TypeORM, Sequelize, or plain SQL scripts, one problem appears again and again: random primary keys break foreign-key relationships across environments.</p> <p class="svelte-led0iy">A user created locally might have one UUID, while the same user in CI has a completely different one. Suddenly your orders table points to a non-existent user, and the entire test suite fails. The solution is to make every primary key deterministic by deriving it from a meaningful seed.</p> <h2 class="svelte-led0iy">How It Works in Practice</h2> <p class="svelte-led0iy">Start by choosing clear seed names for each record. A user becomes user-alice, user-bob, or customer-001. An order becomes order-2025-001. When the fixture runs, the seeded generator turns each name into a fixed UUID. The same fixture file now produces identical data everywhere.</p> <h2 class="svelte-led0iy">Keeping Relationships Intact</h2> <p class="svelte-led0iy">Because every record uses a stable seed, foreign keys automatically match. An order seeded as order-2025-001 will always reference the exact same user UUID as user-alice, no matter where the test runs. This eliminates broken references and makes database snapshots truly portable.</p> <h2 class="svelte-led0iy">Real Benefits You Will See</h2> <p class="svelte-led0iy">Development databases stay in sync with the team. CI pipelines finish faster because fewer tests fail due to missing references. Staging environments mirror production data structure more accurately. Review apps and preview databases become trustworthy because every record has the same identifier.</p> <h2 class="svelte-led0iy">Migration and Seeding Tools</h2> <p class="svelte-led0iy">All popular tools support this pattern. Prisma seed files, TypeORM data sources, Knex migrations, and even raw SQL scripts can call the same seeded generator. Once set up, you never think about random IDs again.</p> <h2 class="svelte-led0iy">FAQ</h2> <details class="svelte-led0iy"><summary class="svelte-led0iy">Do I need to change my schema?</summary> <p class="svelte-led0iy">No. UUID columns work exactly the same; only the way you insert data changes.</p></details> <details class="svelte-led0iy"><summary class="svelte-led0iy">Can I mix seeded and random IDs?</summary> <p class="svelte-led0iy">Yes. Use seeded IDs for fixture records and random ones for dynamic data during tests.</p></details> <details class="svelte-led0iy"><summary class="svelte-led0iy">What about performance?</summary> <p class="svelte-led0iy">Generating a seeded UUID takes microseconds and has zero impact on test speed.</p></details> <p class="italic-note svelte-led0iy">Stable primary keys turn database fixtures from a source of frustration into a reliable testing asset.</p></article></div><!----><!--]--></main> <footer class="footer-custom"><div class="container"><p class="mb-2">© 2025 AxelBase Seeded/Deterministic UUID Generator</p> <div class="footer-links"><a href="../../privacy">Privacy</a> <span>|</span> <a href="../../terms">Terms</a></div></div></footer></div><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_n9uaux = {
+						base: new URL("../..", location).pathname.slice(0, -1),
+						assets: "/seeded-uuid-generator"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../../_app/immutable/entry/start.BDkvFZON.js"),
+						import("../../_app/immutable/entry/app.7Y8erq9-.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 8],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>

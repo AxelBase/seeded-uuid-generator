@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>AxelBase – Seeded/Deterministic UUID Generator</title>
+        <link rel="icon" href="../../AxelLab-Logo.ico" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        />
+
+        
+		<link href="../../_app/immutable/assets/0.CCM5rTYY.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/10.BY2WkL6g.css" rel="stylesheet">
+		<link rel="modulepreload" href="../../_app/immutable/entry/start.BDkvFZON.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Bsshli1w.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CiJE2CXu.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CwymP3Wc.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/-33sGUsW.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Bu8gRI37.js">
+		<link rel="modulepreload" href="../../_app/immutable/entry/app.7Y8erq9-.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/C5yWLS92.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DvoYs7jT.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CLlG5vDu.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/0.CGUPJoaV.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DjWqG_qe.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/D3IJptOo.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/C-Oju6rN.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CechfJk0.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/10.CQBxKQiG.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CGNS_j13.js"><!--q8x3kg--><meta name="description" content="Clear math and real numbers showing why 128-bit seeded UUIDs have essentially zero chance of collision in testing and fixtures."/> <meta property="og:title" content="Collision Probability: Are 128 Bits Really Safe?"/> <meta property="og:description" content="Clear math and real numbers showing why 128-bit seeded UUIDs have essentially zero chance of collision in testing and fixtures."/> <meta property="og:url" content="../../blog/posts/post6"/> <meta property="og:type" content="article"/> <meta name="twitter:card" content="summary_large_image"/><!----><title>Collision Probability: Are 128 Bits Really Safe? | Blog</title>
+    </head>
+    <body data-sveltekit-preload-data="hover">
+        <div style="display: contents"><!--[--><!--[--><!----><div class="page-wrapper"><header class="navbar-custom"><nav class="nav-container"><div class="brand-section"><a href="../../" aria-label="Home"><img src="../../AxelLab-Logo.ico" alt="AxelLab Logo" class="navbar-brand-logo"/></a> <a class="navbar-brand-text" href="../../">AxelBase</a> <div class="bmac-wrapper"><button class="bmac-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.35,22.2L12,22A10,10,0,0,1,2,12V10A2,2,0,0,1,4,8H7.2A5.13,5.13,0,0,1,12,3A5.13,5.13,0,0,1,16.8,8H20A2,2,0,0,1,22,10V12A10,10,0,0,1,12.35,22.2M4,10V12A8,8,0,0,0,12,20A8,8,0,0,0,20,12V10H16.8A5.11,5.11,0,0,1,12.5,5.12A5.15,5.15,0,0,1,7.2,10H4Z"></path></svg> <span class="d-none d-md-inline">Coffee</span></button> <!--[!--><!--]--></div></div> <ul class="nav-links d-none d-md-flex"><li><a class="nav-link-custom" href="../../">Home</a></li> <li><a class="nav-link-custom" href="../../#about">About</a></li> <li><a class="nav-link-custom" href="../../#howto">How to use</a></li> <li><a class="nav-link-custom" href="../../#faq">FAQ</a></li> <li><a class="nav-link-custom" href="../../blog">Blog</a></li></ul> <div class="d-md-none"></div></nav></header> <main><!--[--><!----><div class="container fade-in post-layout svelte-q8x3kg"><div class="breadcrumbs svelte-q8x3kg"><a href="../../blog" class="svelte-q8x3kg">Blog</a> <span>/</span> <p>Collision Probability</p></div> <article class="prose svelte-q8x3kg"><h1 class="svelte-q8x3kg">Collision Probability: Are 128 Bits Really Safe?</h1> <p class="post-meta svelte-q8x3kg">Published: December 8, 2025</p> <p class="svelte-q8x3kg">Many developers worry that truncating SHA-256 to 128 bits might cause collisions. The mathematics says otherwise. In practice, the chance of two different seeds producing the same UUID is so small it will never happen in real testing scenarios.</p> <h2 class="svelte-q8x3kg">The Birthday Paradox Explained</h2> <p class="svelte-q8x3kg">The birthday paradox tells us how many items we need before a collision becomes likely. For 128 bits, you would need roughly 2 to the power of 64 items before the probability reaches fifty percent. That number is larger than all the grains of sand on Earth.</p> <h2 class="svelte-q8x3kg">Real-World Numbers</h2> <p class="svelte-q8x3kg">Even if you generate one billion seeded UUIDs every second for ten years, the probability of a single collision remains far less than one in a trillion. Most test suites contain fewer than ten thousand records total.</p> <h2 class="svelte-q8x3kg">Testing vs Production</h2> <p class="svelte-q8x3kg">In production systems, true randomness is important for security. In testing, collisions only matter if they break your assertions. With reasonable seed names, you control uniqueness yourself, making the math even safer.</p> <h2 class="svelte-q8x3kg">Extra Safety Margin</h2> <p class="svelte-q8x3kg">Using SHA-256 instead of the weaker SHA-1 gives an enormous safety buffer. Even if a theoretical attack existed on SHA-256, you would still need astronomical computing power to find a collision in a test dataset.</p> <h2 class="svelte-q8x3kg">FAQ</h2> <details class="svelte-q8x3kg"><summary class="svelte-q8x3kg">How many UUIDs can I safely create?</summary> <p class="svelte-q8x3kg">Billions per project with zero worry. Most teams never exceed a few thousand.</p></details> <details class="svelte-q8x3kg"><summary class="svelte-q8x3kg">Should I worry about birthday attacks?</summary> <p class="svelte-q8x3kg">No. The numbers required are impossible in testing contexts.</p></details> <details class="svelte-q8x3kg"><summary class="svelte-q8x3kg">Is 128 bits enough for production?</summary> <p class="svelte-q8x3kg">For testing yes; for production secrets use full random UUIDs.</p></details> <p class="italic-note svelte-q8x3kg">You can confidently use 128-bit seeded UUIDs knowing collisions will never affect your work.</p></article></div><!----><!--]--></main> <footer class="footer-custom"><div class="container"><p class="mb-2">© 2025 AxelBase Seeded/Deterministic UUID Generator</p> <div class="footer-links"><a href="../../privacy">Privacy</a> <span>|</span> <a href="../../terms">Terms</a></div></div></footer></div><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_n9uaux = {
+						base: new URL("../..", location).pathname.slice(0, -1),
+						assets: "/seeded-uuid-generator"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../../_app/immutable/entry/start.BDkvFZON.js"),
+						import("../../_app/immutable/entry/app.7Y8erq9-.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 10],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
